@@ -7,24 +7,45 @@ import Button from '../UI/Button/Button';
 const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState();
+
   const [enteredPassword, setEnteredPassword] = useState('');
   const [passwordIsValid, setPasswordIsValid] = useState();
+
   const [formIsValid, setFormIsValid] = useState(false);
 
+ 
   useEffect(() => {
-	setFormIsValid(
-		enteredEmail.includes('@') && enteredPassword.trim().length > 6
-	  );
-  }, [enteredEmail, enteredPassword])
+	const identefire = setTimeout(() => {
+		//console.log("do");
+		setFormIsValid(
+			enteredEmail.includes('@') && enteredPassword.trim().length > 6
+		  );
+	},2000);
+	
+	return () => {
+		//console.log("clean");
+		clearTimeout(identefire);
+	};
 
+  }, [enteredEmail, enteredPassword]);
 
-
+ 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+//
+/* 	setFormIsValid(
+		event.target.value.includes('@') && enteredPassword.trim().length > 6
+	  ); */
+	  //
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+//
+	/* setFormIsValid(
+		enteredEmail.includes('@') && event.target.value.trim().length > 6
+	  ); */
+	  //
   };
 
   const validateEmailHandler = () => {
